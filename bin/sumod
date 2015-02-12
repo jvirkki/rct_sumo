@@ -1,0 +1,42 @@
+#
+#  Copyright 2015 Jyri J. Virkki <jyri@virkki.com>
+#
+#  This file is part of rct_sumo.
+#
+#  rct_sumo is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  rct_sumo is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with rct_sumo.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+
+#------------------------------------------------------------------------------
+# Convenience script for debugging sumo.
+# Runs without gem installation.
+#
+
+if [ "$REX_RUBY" = "" ]; then
+    REX_RUBY=ruby
+fi
+
+REXD=`readlink -f $0`
+BIN=`dirname $REXD`
+LIB=`readlink -f $BIN/../lib`
+REX=$BIN/sumo
+
+echo BIN is $BIN
+echo LIB is $LIB
+echo REXD is $REXD
+echo REX is $REX
+
+CMD="$REX_RUBY -I$LIB -I$LIB/rct -I. $REX $@"
+echo $CMD
+exec $CMD
